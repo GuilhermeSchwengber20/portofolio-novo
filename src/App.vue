@@ -1,26 +1,40 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="w-full h-screen bg-background p-20 flex flex-row gap-16 overflow-hidden">
+    <MenuLateral @mudarMenu="mudarMenuItem" />
+    <Sobre v-if="mostrar === 'Sobre'" class="transition-all" />
+    <Habilidades v-else-if="mostrar === 'Habilidades'" class="transition-all"/>
+    <Projetos v-else-if="mostrar === 'Projetos'" class="transition-all"/>
+    <Contato v-else-if="mostrar === 'Contato'" class="transition-all"/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import MenuLateral from "./components/MenuLateral.vue"
+import Habilidades from "./components/Habilidades.vue"
+import Projetos from "./components/Projetos.vue"
+import Sobre from "./components/Sobre.vue"
+import Contato from "./components/Contato.vue"
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MenuLateral,
+    Sobre,
+    Habilidades,
+    Projetos,
+    Contato
+  },
+  data(){
+    return{
+      mostrar: "Sobre"
+    }
+  },
+  methods: {
+    mudarMenuItem(id){
+      this.mostrar = id
+    }
   }
 }
 </script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
